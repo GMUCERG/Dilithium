@@ -9,6 +9,10 @@ Duc Nguyen, dnguye69@gmu.edu
 ### Academic advisors/Program managers: 
 Kris Gaj, https://ece.gmu.edu/~kgaj/, kgaj@gmu.edu
 
+### Related Paper
+A paper corresponding to this implementation was presented at the International Conference on Field-Programmable Technology (FPT'21) and is publicly available at https://eprint.iacr.org/2021/1451.pdf.
+
+
 ## Details
 
 This repository contains a high performance FPGA implementation of the Dilithium PQC signature algorithm written in Verilog. It contains a top module, "combined_top" which supports the operations of key generation, sign, and verify for security levels 2, 3, and 5. The three associated test benches show how to operate the module for each of these operation modes.
