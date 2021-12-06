@@ -11,7 +11,7 @@ module tb_keygen_top;
     reg clk = 1,  rst = 0, start = 0;
     reg [2:0] sec_lvl = 2;
       
-    localparam  NUM_TV = 100;
+    localparam  NUM_TV = 5;
 
       
     reg [1:0] mode = 0;
@@ -64,7 +64,6 @@ module tb_keygen_top;
 
     integer start_time;
   
-    // add unload for: rho, t1, t0, and tr
     localparam
         S_INIT = 4'd0,
         S_START = 4'd1,
@@ -82,31 +81,31 @@ module tb_keygen_top;
      reg [3:0] state = 0;    
   
     initial begin
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/z_2.txt",  seed);
+        $readmemh("z_2.txt",  seed);
     
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/s1_2.txt",  s1_2);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/s2_2.txt",  s2_2);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/t0_2.txt",   t0_2);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/t1_2.txt",  t1_2);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/k_2.txt",   k_2);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/rho_2.txt", rho_2);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/tr_2.txt",  tr_2);
+        $readmemh("s1_2.txt",  s1_2);
+        $readmemh("s2_2.txt",  s2_2);
+        $readmemh("t0_2.txt",   t0_2);
+        $readmemh("t1_2.txt",  t1_2);
+        $readmemh("k_2.txt",   k_2);
+        $readmemh("rho_2.txt", rho_2);
+        $readmemh("tr_2.txt",  tr_2);
         
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/s1_3.txt",  s1_3);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/s2_3.txt",  s2_3);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/t0_3.txt",   t0_3);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/t1_3.txt",  t1_3);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/k_3.txt",   k_3);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/rho_3.txt", rho_3);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/tr_3.txt",  tr_3);
+        $readmemh("s1_3.txt",  s1_3);
+        $readmemh("s2_3.txt",  s2_3);
+        $readmemh("t0_3.txt",   t0_3);
+        $readmemh("t1_3.txt",  t1_3);
+        $readmemh("k_3.txt",   k_3);
+        $readmemh("rho_3.txt", rho_3);
+        $readmemh("tr_3.txt",  tr_3);
         
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/s1_5.txt",  s1_5);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/s2_5.txt",  s2_5);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/t0_5.txt",   t0_5);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/t1_5.txt",  t1_5);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/k_5.txt",   k_5);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/rho_5.txt", rho_5);
-        $readmemh("D:/programming/0_GMU/Dilithium_HighPerf/test_vectors/tr_5.txt",  tr_5);
+        $readmemh("s1_5.txt",  s1_5);
+        $readmemh("s2_5.txt",  s2_5);
+        $readmemh("t0_5.txt",   t0_5);
+        $readmemh("t1_5.txt",  t1_5);
+        $readmemh("k_5.txt",   k_5);
+        $readmemh("rho_5.txt", rho_5);
+        $readmemh("tr_5.txt",  tr_5);
         
         valid_i = 0;
         ready_o = 0;
@@ -171,7 +170,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_K;
-//                        $display("TB: Done Rho");
                     end
                 end
             end        
@@ -186,7 +184,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_S1;
-//                        $display("TB: Done K");
                     end
                 end
             end
@@ -201,7 +198,6 @@ module tb_keygen_top;
                     if (ctr == 47) begin
                         ctr <= 0;
                         state <= S_S2;
-//                        $display("TB: Done S1");
                     end
                 end
             end
@@ -216,7 +212,6 @@ module tb_keygen_top;
                     if (ctr == 47) begin
                         ctr <= 0;
                         state <= S_T1;
-//                        $display("TB: Done S2");
                     end
                 end
             end
@@ -225,14 +220,12 @@ module tb_keygen_top;
                 if (valid_o) begin
                     if (data_o !== t1_2[c][ctr*64+:64])
                         $display("[T1, %d] Error: Expected %h, received %h", ctr, t1_2[c][ctr*64+:64], data_o); 
-//                    else 
-//                        $display("[T1, %d] Correct: Expected %h, received %h", ctr, t1_2[c][ctr*64+:64], data_o);
+
                     ctr <= ctr + 1;
                     
                     if (ctr == 4*320/8-1) begin
                         ctr <= 0;
                         state <= S_T0;
-//                        $display("TB: Done T1");
                     end
                 end
             end
@@ -241,14 +234,11 @@ module tb_keygen_top;
                 if (valid_o) begin
                     if (data_o !== t0_2[c][ctr*64+:64])
                         $display("[T0, %d] Error: Expected %h, received %h", ctr, t0_2[c][ctr*64+:64], data_o); 
-//                    else
-//                        $display("[T0, %d] Correct: Expected %h, received %h", ctr, t0_2[c][ctr*64+:64], data_o); 
                     ctr <= ctr + 1;
                     
                     if (ctr == 4*416/8-1) begin
                         ctr <= 0;
                         state <= S_TR;
-//                        $display("TB: Done T0");
                     end
                 end
             end
@@ -263,7 +253,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_STOP;
-//                        $display("TB: Done TR");
                     end
                 end
             end
@@ -278,7 +267,6 @@ module tb_keygen_top;
                     c <= 0;
                     sec_lvl <= 3;
                     $display ("Moving to KG3");
-                    //$finish;
                 end
             end
             endcase
@@ -332,7 +320,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_K;
-                        // $display("TB: Done Rho");
                     end
                 end
             end        
@@ -347,7 +334,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_S1;
-                        // $display("TB: Done K");
                     end
                 end
             end
@@ -362,7 +348,6 @@ module tb_keygen_top;
                     if (ctr == 128/2*5*16/64-1) begin
                         ctr <= 0;
                         state <= S_S2;
-                        // $display("TB: Done S1");
                     end
                 end
             end
@@ -377,7 +362,6 @@ module tb_keygen_top;
                     if (ctr == 128/2*6*16/64-1) begin
                         ctr <= 0;
                         state <= S_T1;
-                        // $display("TB: Done S2");
                     end
                 end
             end
@@ -392,7 +376,6 @@ module tb_keygen_top;
                     if (ctr == 15360/64-1) begin
                         ctr <= 0;
                         state <= S_T0;
-                        // $display("TB: Done T1");
                     end
                 end
             end
@@ -407,7 +390,6 @@ module tb_keygen_top;
                     if (ctr == 19968/64-1) begin
                         ctr <= 0;
                         state <= S_TR;
-                        // $display("TB: Done T0");
                     end
                 end
             end
@@ -422,8 +404,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_STOP;
-                        // $display("TB: Done TR");
-                        // $display($time/10);
                     end
                 end
             end
@@ -438,7 +418,6 @@ module tb_keygen_top;
                     c <= 0;
                     sec_lvl <= 5;
                     $display ("Moving to KG5");
-//                    $finish;
                 end
             end
             endcase
@@ -491,7 +470,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_K;
-                        // $display("TB: Done Rho");
                     end
                 end
             end        
@@ -506,7 +484,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_S1;
-                        // $display("TB: Done K");
                     end
                 end
             end
@@ -521,7 +498,6 @@ module tb_keygen_top;
                     if (ctr == 96/2*7*16/64-1) begin
                         ctr <= 0;
                         state <= S_S2;
-                        // $display("TB: Done S1");
                     end
                 end
             end
@@ -536,7 +512,6 @@ module tb_keygen_top;
                     if (ctr == 96/2*8*16/64-1) begin
                         ctr <= 0;
                         state <= S_T1;
-                        // $display("TB: Done S2");
                     end
                 end
             end
@@ -551,7 +526,6 @@ module tb_keygen_top;
                     if (ctr == 20480/64-1) begin
                         ctr <= 0;
                         state <= S_T0;
-                        // $display("TB: Done T1");
                     end
                 end
             end
@@ -566,7 +540,6 @@ module tb_keygen_top;
                     if (ctr == 26624/64-1) begin
                         ctr <= 0;
                         state <= S_TR;
-                        // $display("TB: Done T0");
                     end
                 end
             end
@@ -581,8 +554,6 @@ module tb_keygen_top;
                     if (ctr == 3) begin
                         ctr <= 0;
                         state <= S_STOP;
-                        // $display("TB: Done TR");
-                        // $display($time/10);
                     end
                 end
             end

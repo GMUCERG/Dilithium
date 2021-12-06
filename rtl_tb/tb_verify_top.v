@@ -10,7 +10,7 @@ Affilition: George Mason University
 module tb_verify_top;
   reg clk = 1,  rst = 0, start = 0;
   
-  localparam  NUM_TV = 100;
+  localparam  NUM_TV = 5;
 
 
     reg [2:0] sec_lvl = 2;
@@ -224,10 +224,7 @@ module tb_verify_top;
             if (valid_o) begin
                 if (data_o == 1) begin
                     $display("Rejected");
-                    // $finish;
-                end else begin
-                    //$display("Accepted");
-                end
+                end 
                 state <= STOP;
             end
         end
@@ -243,7 +240,6 @@ module tb_verify_top;
                 c <= 0;
                 sec_lvl <= 3;
                 $display ("Moving to VY3");
-                //$finish;
             end       
         end
         endcase
@@ -362,9 +358,6 @@ module tb_verify_top;
             if (valid_o) begin
                 if (data_o == 1) begin
                     $display("Rejected");
-                    // $finish;
-                end else begin
-//                    $display("Accepted");
                 end
                 state <= STOP;
             end
@@ -381,7 +374,6 @@ module tb_verify_top;
                 c <= 0;
                 sec_lvl <= 5;
                 $display ("Moving to VY5");
-                //$finish;
             end           
         end
         endcase
@@ -500,9 +492,6 @@ module tb_verify_top;
             if (valid_o) begin
                 if (data_o == 1) begin
                     $display("Rejected");
-                    // $finish;
-                end else begin
-//                    $display("Accepted");
                 end
                 state <= STOP;
             end

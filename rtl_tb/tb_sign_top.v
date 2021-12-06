@@ -13,7 +13,7 @@ module tb_sign_top;
     reg [2:0] sec_lvl = 2;
     reg [1:0] mode = 2;
     
-    localparam NUM_TV = 100;
+    localparam NUM_TV = 5;
 
     reg valid_i,  ready_o;
     wire ready_i, valid_o;
@@ -273,7 +273,6 @@ module tb_sign_top;
                 if (ctr == 288-1) begin
                     ctr <= 0;
                     state <= UNLOAD_H;
-                    // $display("TB: Done Z");
                 end
             end
         end
@@ -288,7 +287,6 @@ module tb_sign_top;
                 if (ctr == 10) begin
                     ctr <= 0;
                     state <= UNLOAD_C;
-                    // $display("TB: Done H");
                 end
             end
         end
@@ -303,7 +301,6 @@ module tb_sign_top;
                 if (ctr == 3) begin
                     ctr <= 0;
                     state <= START;
-                    // $display("TB: Done C");
 
                     c       <= c + 1;
                     $display("SG2[%d] completed in %d clock cycles", c, ($time-start_time)/10);
@@ -312,10 +309,7 @@ module tb_sign_top;
                         c <= 0;
                         sec_lvl <= 3;
                         $display ("Moving to SG3");
-                        //$finish;
                     end
-
-                    // $finish;
                 end
             end
         end
@@ -463,7 +457,6 @@ module tb_sign_top;
                 if (ctr == 25600/64-1) begin
                     ctr <= 0;
                     state <= UNLOAD_H;
-                    // $display("TB: Done Z");
                 end
             end
         end
@@ -478,7 +471,6 @@ module tb_sign_top;
                 if (ctr == 7) begin
                     ctr <= 0;
                     state <= UNLOAD_C;
-                    // $display("TB: Done H");
                 end
             end
         end
@@ -493,7 +485,6 @@ module tb_sign_top;
                 if (ctr == 3) begin
                     ctr <= 0;
                     state <= START;
-                    // $display("TB: Done C");
                     c <= c + 1;
                     //$finish;
                     $display("SG3[%d] completed in %d clock cycles", c, ($time-start_time)/10);
@@ -502,7 +493,6 @@ module tb_sign_top;
                         c <= 0;
                         sec_lvl <= 5;
                         $display ("Moving to SG5");
-                        //$finish;
                     end
                 end
             end
@@ -651,7 +641,6 @@ module tb_sign_top;
                 if (ctr == 35840/64-1) begin
                     ctr <= 0;
                     state <= UNLOAD_H;
-                    // $display("TB: Done Z");
                 end
             end
         end
@@ -665,7 +654,6 @@ module tb_sign_top;
                 if (ctr == 10) begin
                     ctr <= 0;
                     state <= UNLOAD_C;
-                    // $display("TB: Done H");
                 end
             end
         end
@@ -680,7 +668,6 @@ module tb_sign_top;
                 if (ctr == 3) begin
                     ctr <= 0;
                     state <= START;
-                    // $display("TB: Done C");
                     c <= c + 1;
                     $display("SG5[%d] completed in %d clock cycles", c, ($time-start_time)/10);
 
