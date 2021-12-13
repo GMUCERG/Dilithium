@@ -43,7 +43,6 @@ void ntt2x2_invntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
     data_t fifo_b[DEPT_B] = {0};
     data_t fifo_c[DEPT_C] = {0};
     data_t fifo_d[DEPT_D] = {0};
-    // data_t fa, fb, fc, fd;
 
     // Initialize Forward NTT
     unsigned fw_ntt_pattern[] = {6, 4, 2, 0, 6};
@@ -104,12 +103,6 @@ void ntt2x2_invntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
             // Rolling FIFO index
             unsigned fi = FIFO<DEPT_I>(fifo_i, ram_i);
 
-            // Write data_out to FIFO A, B, C, D
-            // FIFO_PISO<DEPT_A, data_t>(fifo_a, false, data_fifo, data_out[0]);
-            // FIFO_PISO<DEPT_B, data_t>(fifo_b, false, data_fifo, data_out[1]);
-            // FIFO_PISO<DEPT_C, data_t>(fifo_c, false, data_fifo, data_out[2]);
-            // FIFO_PISO<DEPT_D, data_t>(fifo_d, false, data_fifo, data_out[3]);
-
             // Replace by single write FIFO, null as output since we don't care about output
             // Rolling FIFO and extract data
             count = (count + 1) & 3;
@@ -164,12 +157,6 @@ void ntt2x2_invntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
         // Rolling FIFO index
         unsigned fi = FIFO<DEPT_I>(fifo_i, 0);
 
-        // Write data_out to FIFO A, B, C, D
-        // FIFO<DEPT_A>(fifo_a, 0);
-        // FIFO<DEPT_B>(fifo_b, 0);
-        // FIFO<DEPT_C>(fifo_c, 0);
-        // FIFO<DEPT_D>(fifo_d, 0);
-
         // Rolling the FIFO and extract data from FIFO
         count = (count + 1) & 3;
         read_write_fifo<data_t>(mode, data_fifo, null, null, fifo_a, fifo_b, fifo_c, fifo_d, count);
@@ -178,11 +165,5 @@ void ntt2x2_invntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
         // Write back
         write_ram(ram, fi, data_fifo);
 
-        // printf("--------------\n");
-        // print_array(fifo_i, DEPT_I, "FIFO_I");
-        // print_array(fifo_a, DEPT_A, "FIFO_A");
-        // print_array(fifo_b, DEPT_B, "FIFO_B");
-        // print_array(fifo_c, DEPT_C, "FIFO_C");
-        // print_array(fifo_d, DEPT_D, "FIFO_D");
     }
 }

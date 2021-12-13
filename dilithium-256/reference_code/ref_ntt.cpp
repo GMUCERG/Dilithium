@@ -29,7 +29,6 @@ void ntt(data_t a[DILITHIUM_N])
 {
     unsigned int len, start, j, k;
     data_t zeta, t;
-    data_t m, n;
 
     k = 0;
     for (len = DILITHIUM_N / 2; len > 0; len >>= 1)
@@ -39,16 +38,9 @@ void ntt(data_t a[DILITHIUM_N])
             zeta = zetas_barrett[++k];
             for (j = start; j < start + len; ++j)
             {
-
                 t = ((data2_t)zeta * a[j + len]) % DILITHIUM_Q;
                 a[j + len] = (a[j] - t) % DILITHIUM_Q;
                 a[j] = (a[j] + t) % DILITHIUM_Q;
-
-                m = a[j];
-                n = a[j + len];
-#if DEBUG == 5
-                printf("%d: %u, %u = %u, %u | %u\n", len, j, j + len, m, n, k);
-#endif
             }
         }
     }
@@ -68,7 +60,6 @@ void invntt(data_t a[DILITHIUM_N])
 {
     unsigned int start, len, j, k;
     data_t t, zeta, w;
-    data_t m, n;
 
     const data_t f = 8347681; // pow(256, -1, 8380417)
 
@@ -85,19 +76,12 @@ void invntt(data_t a[DILITHIUM_N])
                 a[j] = (t + a[j + len]) % DILITHIUM_Q;
                 w = (t - a[j + len]) % DILITHIUM_Q;
                 a[j + len] = ((data2_t)zeta * w) % DILITHIUM_Q;
-
-                m = a[j];
-                n = a[j + len];
-#if DEBUG == 5
-                printf("%d: %u, %u = %u, %u | %u\n", len, j, j + len, m, n, k);
-#endif
             }
         }
     }
 
     for (j = 0; j < DILITHIUM_N; ++j)
     {
-        // This work, but f is not same as in ref code
         a[j] = ((data2_t)f * a[j]) % DILITHIUM_Q;
     }
 }

@@ -98,15 +98,6 @@ void ntt2x2_fwdntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
             // Rolling FIFO for index of RAM
             unsigned fi = FIFO<DEPT_W>(fifo_i, ram_i);
 
-            // printf("--------------%d - %d <= %d\n", count, ram_i, addr);
-            // print_array<unsigned>(tw_i, 4, "twiddle");
-            // print_array<data_t>(fifo_i, DEPT_W, "FIFO_I");
-            // print_array<data_t>(fifo_a, DEPT_A, "FIFO_A");
-            // print_array<data_t>(fifo_b, DEPT_B, "FIFO_B");
-            // print_array<data_t>(fifo_c, DEPT_C, "FIFO_C");
-            // print_array<data_t>(fifo_d, DEPT_D, "FIFO_D");
-            // print_array<data_t>(data_in, 4, "data_in");
-            
             /* 
              * PIPO for twiddle factor, delay it by DEPT_W
              */
@@ -115,11 +106,7 @@ void ntt2x2_fwdntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
 
             // Calculate
             buttefly_circuit<data2_t, data_t>(data_out, data_fifo, w_out, mode);
-            // print_array<data_t>(data_fifo, 4, "i");
-            // print_array<data_t>(w_out, 4, "w");
-            // print_array<data_t>(data_out, 4, "o");
-            // printf("\n");
-            
+
             /* ============================================== */
             // count equal the size of FIFO_I
             if (count == 0 && i != 0)
@@ -146,7 +133,6 @@ void ntt2x2_fwdntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
             if (k + (1 << s) < BRAM_DEPT)
             {
                 k += (1 << s);
-                // printf("k = %d\n", k);
             }
             else
             {
@@ -157,7 +143,6 @@ void ntt2x2_fwdntt(bram *ram, enum OPERATION mode, enum MAPPING mapping)
             update_indexes(tw_i, tw_base_i, l, mode);
         }
         /* ============================================== */
-        // print_reshaped_array(ram, BRAM_DEPT, "ram");
     }
 
     for (unsigned i = 0; i < DEPT_W; i++)

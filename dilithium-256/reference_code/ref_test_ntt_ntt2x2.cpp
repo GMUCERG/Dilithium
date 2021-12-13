@@ -81,7 +81,6 @@ int main()
         }
 
         invntt2x2_ref(a);
-        // printf("=======\n");
         invntt(a_gold);
 
         if (compare_array(a_gold, a))

@@ -61,40 +61,20 @@ void ntt2x2_ref(data_t a[DILITHIUM_N])
                 b1 = a[j + 2 * len];
                 b2 = a[j + 3 * len];
 
-#if DEBUG == 2
-                printf("i :%3u, %3u, %3u, %3u,\n", a1, b1, a2, b2);
-                printf("w :%3u, %3u, %3u, %3u,\n", zeta1, zeta1, zeta2[0], zeta2[1]);
-#endif
-
                 // Left
                 // a1 - b1, a2 - b2
                 ctbf(a1, b1, zeta1, t1);
                 ctbf(a2, b2, zeta1, t2);
-#if DEBUG == 1
-                printf("[%d]: %u, %u = %u, %u | %u\n", 2 * len, j, j + 2 * len,
-                       a1, b1, k1);
-                printf("[%d]: %u, %u = %u, %u | %u\n", 2 * len, j + len, j + 3 * len,
-                       a2, b2, k1);
-#endif
 
                 // Right
                 // a1 - a2, b1 - b2
                 ctbf(a1, a2, zeta2[0], t1);
                 ctbf(b1, b2, zeta2[1], t2);
 
-#if DEBUG == 1
-                printf("[%d]: %u, %u = %u, %u | %u\n", len, j, j + len,
-                       a1, a2, k2[0]);
-                printf("[%d]: %u, %u = %u, %u | %u\n", len, j + 2 * len, j + 3 * len,
-                       b1, b2, k2[1]);
-#endif
                 a[j] = a1;
                 a[j + len] = a2;
                 a[j + 2 * len] = b1;
                 a[j + 3 * len] = b2;
-#if DEBUG == 2
-                printf("o :%3u, %3u, %3u, %3u,\n\n", a1, a2, b1, b2);
-#endif
             }
         }
     }
@@ -148,23 +128,12 @@ void invntt2x2_ref(data_t a[DILITHIUM_N])
                 // a1 - a2, b1 - b2
                 gsbf_div2(a1, a2, zeta1[0], t1);
                 gsbf_div2(b1, b2, zeta1[1], t2);
-#if DEBUG == 3
-                printf("[%d]: %u, %u = %u, %u | %u\n", len, j, j + len,
-                       a1, a2, k1[0]);
-                printf("[%d]: %u, %u = %u, %u | %u\n", len, j + 2 * len, j + 3 * len,
-                       b1, b2, k1[1]);
-#endif
 
                 // Right
                 // a1 - b1, a2 - b2
                 gsbf_div2(a1, b1, zeta2, t1);
                 gsbf_div2(a2, b2, zeta2, t2);
-#if DEBUG == 4
-                printf("[%d]: %u, %u = %u, %u | %u\n", 2 * len, j, j + 2 * len,
-                       a1, b1, k2);
-                printf("[%d]: %u, %u = %u, %u | %u\n", 2 * len, j + len, j + 3 * len,
-                       a2, b2, k2);
-#endif
+
                 a[j] = a1;
                 a[j + len] = a2;
                 a[j + 2 * len] = b1;
