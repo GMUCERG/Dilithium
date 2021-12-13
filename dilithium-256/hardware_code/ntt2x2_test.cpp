@@ -140,7 +140,7 @@ int polymul(data_t a[DILITHIUM_N], data_t b[DILITHIUM_N])
 
 int main()
 {
-    printf("Test for DILITHIUM_N = %u\n", DILITHIUM_N);
+    printf("Test for DILITHIUM_N = %u: %u\n", DILITHIUM_N, TESTS);
     srand(time(0));
     data_t r_invntt[DILITHIUM_N],
         r_mul[DILITHIUM_N],
