@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-// Define size of falcon
+// Define size of Dilithium
 typedef int32_t data_t;
 typedef int64_t data2_t;
 
