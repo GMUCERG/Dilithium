@@ -22,7 +22,7 @@
 #  */
 
 CC = /usr/bin/c++
-CFLAGS = -O3 -Wall
+CFLAGS = -O3 -Wall -Wpedantic
 RM = /bin/rm 
 
 REF_DIR = ../reference_code
