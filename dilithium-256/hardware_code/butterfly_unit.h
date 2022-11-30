@@ -49,7 +49,7 @@ void butterfly(enum OPERATION mode, T *bj, T *bjlen,
          * a[j + len] = ((uint32_t)zeta * a[j + len]) % DILITHIUM_Q; 
          */
         aj2 = (aj1 + ajlen1) % DILITHIUM_Q;
-        ajlen2 = (aj1 - ajlen1) % DILITHIUM_Q;
+        ajlen2 = (ajlen1 - aj1) % DILITHIUM_Q;
     }
     else
     {
